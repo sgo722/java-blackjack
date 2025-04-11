@@ -9,4 +9,12 @@ public class Participants {
         this.players = players;
         this.dealer = dealer;
     }
+
+    public Players getPlayers() {
+        return players;
+    }
+
+    public Dealer getDealer() {
+        return dealer;
+    }
 }

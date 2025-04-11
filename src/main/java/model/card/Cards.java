@@ -1,6 +1,7 @@
 package model.card;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Cards {
@@ -16,11 +17,14 @@ public class Cards {
         this.cards = cards;
     }
 
-
     public Cards add(Card drawCard) {
         List<Card> newCards = new ArrayList<>(cards);
         newCards.add(drawCard);
 
         return new Cards(newCards);
+    }
+
+    public List<Card> getCards() {
+        return Collections.unmodifiableList(cards);
     }
 }

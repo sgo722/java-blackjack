@@ -3,6 +3,8 @@ package model.participant;
 import model.card.Card;
 import model.card.Cards;
 
+import java.util.List;
+
 public class Dealer extends Participant {
     // 카드의 합이 16이하라면 카드를 뽑는다.
     private final Cards cards;
@@ -15,7 +17,11 @@ public class Dealer extends Participant {
         this.cards = cards;
     }
 
-    public void receive(Card draw) {
-        Cards add = cards.add(draw);
+    public Dealer receive(Card draw) {
+        return new Dealer(cards.add(draw));
+    }
+
+    public List<Card> getCards() {
+        return cards.getCards();
     }
 }

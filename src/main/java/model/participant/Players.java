@@ -1,7 +1,5 @@
 package model.participant;
 
-import model.card.Card;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +11,7 @@ public class Players {
         this.players = players;
     }
 
-    public static Players create(List<String> playerNames) {
+    public static Players fromNames(List<String> playerNames) {
         List<Player> playerList = new ArrayList<>();
 
         for (String name : playerNames) {
@@ -21,6 +19,10 @@ public class Players {
         }
 
         return new Players(playerList);
+    }
+
+    public static Players from(List<Player> players) {
+        return new Players(players);
     }
 
     public List<String> getName(){
@@ -31,5 +33,11 @@ public class Players {
 
     public List<Player> getPlayers() {
         return players;
+    }
+
+    public List<String> exportPlayerNames(){
+        return players.stream()
+                .map(Player::getName)
+                .toList();
     }
 }

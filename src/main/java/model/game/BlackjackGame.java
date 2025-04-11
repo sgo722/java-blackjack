@@ -6,6 +6,9 @@ import model.participant.Participants;
 import model.participant.Player;
 import model.participant.Players;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BlackjackGame {
     // 블랙잭 결과를 비교한다.
     private final Deck deck;
@@ -20,20 +23,36 @@ public class BlackjackGame {
         Dealer dealer = new Dealer();
 
         for(int drawCount = 0; drawCount < 2; drawCount++) {
-            drawPlayers(players, deck);
-            drawDealer(dealer, deck);
+            players = drawCardToPlayers(players, deck);
+            dealer = drawCardToDealer(dealer, deck);
         }
 
         return new BlackjackGame(deck, new Participants(players, dealer));
     }
 
-    private static void drawPlayers(Players players, Deck deck) {
+    private static Players drawCardToPlayers(Players players, Deck deck) {
+        List<Player> drawPlayers = new ArrayList<>();
+
         for(Player player : players.getPlayers()) {
-            player.receive(deck.draw());
+            drawPlayers.add(player.receive(deck.draw()));
         }
+
+        return Players.from(drawPlayers);
     }
 
-    private static void drawDealer(Dealer dealer, Deck deck) {
-        dealer.receive(deck.draw());
+    private static Dealer drawCardToDealer(Dealer dealer, Deck deck) {
+        return dealer.receive(deck.draw());
+    }
+
+    public Participants getParticipants() {
+        return participants;
+    }
+
+    public Dealer getDealer() {
+        return participants.getDealer();
+    }
+
+    public Players getPlayers(){
+        return participants.getPlayers();
     }
 }
