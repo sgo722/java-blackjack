@@ -11,12 +11,19 @@ public class Players {
         this.players = players;
     }
 
-    public static Players makePlayer(List<String> playerNames) {
+    public static Players create(List<String> playerNames) {
         List<Player> playerList = new ArrayList<>();
+
         for (String name : playerNames) {
-            playerList.add(Player.makePlayer(name));
+            playerList.add(Player.create(name));
         }
 
         return new Players(playerList);
+    }
+
+    public List<String> getName(){
+        return players.stream()
+                .map(Player::getName)
+                .toList();
     }
 }

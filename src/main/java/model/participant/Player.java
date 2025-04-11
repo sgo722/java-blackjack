@@ -8,7 +8,11 @@ public class Player extends Participant {
         this.name = name;
     }
 
-    public static Player makePlayer(String name){
+    public static Player create(String name){
         return new Player(new Name(name));
+    }
+
+    public String getName() {
+        return name.getName();
     }
 }
