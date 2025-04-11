@@ -9,19 +9,13 @@ import view.OutputView;
 
 public class BlackjackGameController {
     // 블랙잭 게임을 제어한다.
-    private Deck deck;
-
-    public BlackjackGameController() {
-    }
-
     public void start(){
         init();
     }
 
     private void init(){
         Players players = Players.create(InputView.inputPlayerNames());
-        deck = new Deck();
-        BlackjackGame blackjackGame = BlackjackGame.create(players, deck);
+        BlackjackGame blackjackGame = BlackjackGame.create(players, new Deck());
         OutputView.printSplitCard(players.getName());
     }
 }

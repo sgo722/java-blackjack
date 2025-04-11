@@ -31,4 +31,8 @@ public class Deck {
     public Card draw() {
         return deck.pop();
     }
+
+    public int size(){
+        return deck.size();
+    }
 }
