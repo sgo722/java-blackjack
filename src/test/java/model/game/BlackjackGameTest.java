@@ -12,7 +12,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 class BlackjackGameTest {
 
-    @DisplayName("게임 생성 시 딜러와 플레이어는 각각 2장의 카드를 받는다")
+    @DisplayName("게임 생성 시 참여자들은 각각 2장의 카드를 받는다")
     @Test
     void hasOnlyTwoCard() {
         // given

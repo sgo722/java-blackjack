@@ -29,6 +29,9 @@ public class Deck {
     }
 
     public Card draw() {
+        if(deck.isEmpty()) {
+            throw new IllegalArgumentException("[ERROR] 카드가 부족합니다.");
+        }
         return deck.pop();
     }
 
