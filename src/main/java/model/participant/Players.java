@@ -1,5 +1,7 @@
 package model.participant;
 
+import model.card.Card;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,5 +27,9 @@ public class Players {
         return players.stream()
                 .map(Player::getName)
                 .toList();
+    }
+
+    public List<Player> getPlayers() {
+        return players;
     }
 }
