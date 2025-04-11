@@ -23,3 +23,16 @@
       2. 카드에는 문양과 숫자가 있다.
          3. 문양enum, 숫자enum을 쓴다?
          4. 문양과 숫자를 가지고 있는 enum을 만든다?
+
+
+InputView - 입력
+OutputView - 출력
+
+BlackjackGame - 블랙잭
+
+Participant - 참가자
+ㄴ Player - 플레이어
+ㄴ Dealer - 딜러
+
+Cards - 카드 일급 컬렉션
+ㄴ Card - 카드(enum)
