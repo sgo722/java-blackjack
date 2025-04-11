@@ -15,7 +15,7 @@ public class Players {
     public static Players makePlayer(List<String> playerNames) {
         List<Player> playerList = new ArrayList<>();
         for (String name : playerNames) {
-            playerList.add(new Player(name));
+            playerList.add(Player.makePlayer(name));
         }
 
         return new Players(playerList);
