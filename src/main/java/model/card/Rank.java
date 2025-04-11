@@ -1,4 +1,4 @@
-package model;
+package model.card;
 
 public enum Rank {
     // 문양과 숫자를 가진다.

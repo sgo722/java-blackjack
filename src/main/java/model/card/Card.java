@@ -1,4 +1,4 @@
-package model;
+package model.card;
 
 public class Card {
     //카드는 문양과 랭크를 가진다.

@@ -1,4 +1,4 @@
-package model;
+package model.participant;
 
 public class Name {
     private static final String INVALID_NAME_CHARACTERS_REGEX = ".*[^a-zA-Z0-9가-힣].*";

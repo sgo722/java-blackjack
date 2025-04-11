@@ -1,4 +1,4 @@
-package model;
+package model.participant;
 
 public abstract class Participant {
     // 카드를 뽑는다.

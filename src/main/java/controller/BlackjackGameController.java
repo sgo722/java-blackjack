@@ -1,6 +1,6 @@
 package controller;
 
-import model.Players;
+import model.participant.Players;
 import view.InputView;
 
 public class BlackjackGameController {
