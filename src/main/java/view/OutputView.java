@@ -2,6 +2,7 @@ package view;
 
 import dto.CardDto;
 import dto.ParticipantDto;
+import model.participant.Player;
 
 import javax.swing.*;
 import java.util.List;

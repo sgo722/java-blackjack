@@ -25,11 +25,11 @@ class BlackjackGameTest {
 
         // then
         Dealer dealer = blackjackGame.getDealer();
-        Players dealtPlayers = blackjackGame.getPlayers();
+        List<Player> dealtPlayers = blackjackGame.getPlayers();
 
         assertThat(dealer.getCards()).hasSize(2);
 
-        for (Player player : dealtPlayers.getPlayers()) {
+        for (Player player : dealtPlayers) {
             assertThat(player.getCards()).hasSize(2);
         }
     }

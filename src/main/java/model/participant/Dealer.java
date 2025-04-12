@@ -7,6 +7,8 @@ import java.util.List;
 
 public class Dealer extends Participant {
     // 카드의 합이 16이하라면 카드를 뽑는다.
+    private static final int CAN_DRAW = 16;
+
     private final Cards cards;
 
     public Dealer() {
@@ -23,5 +25,9 @@ public class Dealer extends Participant {
 
     public List<Card> getCards() {
         return cards.getCards();
+    }
+
+    public boolean canDraw() {
+        return cards.calculateScore() <= CAN_DRAW;
     }
 }

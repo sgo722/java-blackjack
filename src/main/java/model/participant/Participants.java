@@ -1,5 +1,9 @@
 package model.participant;
 
+import model.card.Card;
+
+import java.util.List;
+
 public class Participants {
 
     private final Players players;
@@ -10,11 +14,15 @@ public class Participants {
         this.dealer = dealer;
     }
 
-    public Players getPlayers() {
-        return players;
+    public List<Player> getPlayers() {
+        return players.getPlayers();
     }
 
     public Dealer getDealer() {
         return dealer;
+    }
+
+    public Participants giveCardToPlayer(String playerName, Card card) {
+        return new Participants(players.giveCardTo(playerName, card), dealer);
     }
 }

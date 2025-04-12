@@ -27,4 +27,19 @@ public class Cards {
     public List<Card> getCards() {
         return Collections.unmodifiableList(cards);
     }
+
+    public int calculateScore(){
+        int score = 0;
+        boolean hasA = false;
+        for (Card card : cards) {
+            if(card.isAce()) hasA = true;
+            score += card.getValue();
+        }
+
+        if(hasA && score <= 11){
+            score += 10;
+        }
+
+        return score;
+    }
 }

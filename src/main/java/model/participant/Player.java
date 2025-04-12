@@ -7,6 +7,8 @@ import java.util.List;
 
 public class Player extends Participant {
     // 카드의 합이 21이하라면 카드를 뽑는다.
+    private static final int CAN_DRAW = 21;
+
     private final Name name;
     private final Cards cards;
 
@@ -34,5 +36,17 @@ public class Player extends Participant {
 
     public List<Card> getCards() {
         return cards.getCards();
+    }
+
+    public boolean canDraw() {
+        return cards.calculateScore() <= CAN_DRAW;
+    }
+
+    public Player giveCardIfMatches(String playerName, Card card) {
+        if(playerName.equals(name.getName())){
+            System.out.println(card.getValue());
+            return receive(card);
+        }
+        return this;
     }
 }

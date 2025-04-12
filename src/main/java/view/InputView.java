@@ -16,4 +16,11 @@ public class InputView {
 
         return List.of(playerNames.split(NAME_DELIMITER));
     }
+
+    public static String printDrawMore(String name) {
+        System.out.print(name);
+        System.out.println(" 한장의 카드를 더 받으시겠습니까?(예는 y, 아니오는 n)");
+
+        return SCANNER.nextLine();
+    }
 }

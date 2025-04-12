@@ -10,11 +10,19 @@ public class Card {
         this.rank = rank;
     }
 
+    public boolean isAce(){
+        return rank.isAce();
+    }
+
     public String getSuit(){
         return suit.getName();
     }
 
     public String getRank(){
         return rank.getName();
+    }
+
+    public int getValue(){
+        return rank.getValue();
     }
 }

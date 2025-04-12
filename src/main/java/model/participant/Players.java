@@ -1,5 +1,7 @@
 package model.participant;
 
+import model.card.Card;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,5 +41,13 @@ public class Players {
         return players.stream()
                 .map(Player::getName)
                 .toList();
+    }
+
+    public Players giveCardTo(String playerName, Card card) {
+        List<Player> updatedPlayers = new ArrayList<>();
+        for (Player player : players) {
+            updatedPlayers.add(player.giveCardIfMatches(playerName, card));
+        }
+        return new Players(updatedPlayers);
     }
 }

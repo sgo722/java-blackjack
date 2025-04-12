@@ -27,15 +27,26 @@ public class ParticipantDto {
         return new ParticipantDto("딜러", cardDtos);
     }
 
-    public static List<ParticipantDto> from(Players players) {
+    public static List<ParticipantDto> from(List<Player> players) {
         List<ParticipantDto> participantDtos = new ArrayList<>();
-        for(Player player: players.getPlayers()) {
+        for(Player player: players) {
             List<CardDto> cardDtos = new ArrayList<>();
             for (Card card : player.getCards()) {
                 cardDtos.add(CardDto.from(card));
             }
             participantDtos.add(new ParticipantDto(player.getName(), cardDtos));
         }
+
+        return participantDtos;
+    }
+
+    public static List<ParticipantDto> from(Player player) {
+        List<ParticipantDto> participantDtos = new ArrayList<>();
+        List<CardDto> cardDtos = new ArrayList<>();
+        for (Card card : player.getCards()) {
+            cardDtos.add(CardDto.from(card));
+        }
+        participantDtos.add(new ParticipantDto(player.getName(), cardDtos));
 
         return participantDtos;
     }

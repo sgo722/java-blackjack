@@ -11,26 +11,26 @@ import java.util.List;
 
 public class BlackjackGame {
     // 블랙잭 결과를 비교한다.
-    private final Deck deck;
     private final Participants participants;
+    private final Deck deck;
 
-    private BlackjackGame(Deck deck, Participants participants) {
-        this.deck = deck;
+    private BlackjackGame(Participants participants, Deck deck) {
         this.participants = participants;
+        this.deck = deck;
     }
 
     public static BlackjackGame create(Players players, Deck deck) {
         Dealer dealer = new Dealer();
 
         for(int drawCount = 0; drawCount < 2; drawCount++) {
-            players = drawCardToPlayers(players, deck);
-            dealer = drawCardToDealer(dealer, deck);
+            players = giveCardToPlayers(players, deck);
+            dealer = giveCardToDealer(dealer, deck);
         }
 
-        return new BlackjackGame(deck, new Participants(players, dealer));
+        return new BlackjackGame(new Participants(players, dealer), deck);
     }
 
-    private static Players drawCardToPlayers(Players players, Deck deck) {
+    private static Players giveCardToPlayers(Players players, Deck deck) {
         List<Player> drawPlayers = new ArrayList<>();
 
         for(Player player : players.getPlayers()) {
@@ -40,8 +40,13 @@ public class BlackjackGame {
         return Players.from(drawPlayers);
     }
 
-    private static Dealer drawCardToDealer(Dealer dealer, Deck deck) {
+    private static Dealer giveCardToDealer(Dealer dealer, Deck deck) {
         return dealer.receive(deck.draw());
+    }
+
+
+    public BlackjackGame giveCardToPlayer(String playerName) {
+        return new BlackjackGame(participants.giveCardToPlayer(playerName, deck.draw()),deck);
     }
 
     public Participants getParticipants() {
@@ -52,7 +57,17 @@ public class BlackjackGame {
         return participants.getDealer();
     }
 
-    public Players getPlayers(){
+    public List<Player> getPlayers(){
         return participants.getPlayers();
+    }
+
+    public Player getPlayer(String playerName) {
+        List<Player> players = participants.getPlayers();
+        for(Player player : players) {
+            if(player.getName().equals(playerName)) {
+                return player;
+            }
+        }
+        return null;
     }
 }
