@@ -34,8 +34,8 @@ public class Player extends Participant {
         return new Player(name, cards.add(draw));
     }
 
-    public List<Card> getCards() {
-        return cards.getCards();
+    public Cards getCards() {
+        return cards;
     }
 
     public boolean canDraw() {

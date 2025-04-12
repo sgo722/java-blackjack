@@ -23,8 +23,8 @@ public class Dealer extends Participant {
         return new Dealer(cards.add(draw));
     }
 
-    public List<Card> getCards() {
-        return cards.getCards();
+    public Cards getCards() {
+        return cards;
     }
 
     public boolean canDraw() {

@@ -24,7 +24,7 @@ public class Cards {
         return new Cards(newCards);
     }
 
-    public List<Card> getCards() {
+    public List<Card> getCardList() {
         return Collections.unmodifiableList(cards);
     }
 

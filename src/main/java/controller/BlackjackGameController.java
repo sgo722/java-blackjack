@@ -43,5 +43,7 @@ public class BlackjackGameController {
             OutputView.printReceiveCardToDealer();
             blackjackGame = blackjackGame.giveCardToDealer();
         }
+
+        OutputView.printResult(ParticipantDto.from(blackjackGame.getParticipants()));
     }
 }

@@ -1,40 +1,32 @@
 package dto;
 
-import model.card.Card;
 import model.participant.Dealer;
 import model.participant.Participants;
 import model.participant.Player;
-import model.participant.Players;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ParticipantDto {
     private final String name;
-    private final List<CardDto> cardDtos;
+    private final CardsDto cardDtos;
 
-    private ParticipantDto(String name, List<CardDto> cardDtos) {
+    private ParticipantDto(String name, CardsDto cardDtos) {
         this.name = name;
         this.cardDtos = cardDtos;
     }
 
     public static ParticipantDto from(Dealer dealer) {
-        List<CardDto> cardDtos = new ArrayList<>();
-        for(Card card : dealer.getCards()){
-            cardDtos.add(CardDto.from(card));
-        }
+        CardsDto cardsDto = CardsDto.fromCards(dealer.getCards());
 
-        return new ParticipantDto("딜러", cardDtos);
+        return new ParticipantDto("딜러", cardsDto);
     }
 
     public static List<ParticipantDto> from(List<Player> players) {
         List<ParticipantDto> participantDtos = new ArrayList<>();
         for(Player player: players) {
-            List<CardDto> cardDtos = new ArrayList<>();
-            for (Card card : player.getCards()) {
-                cardDtos.add(CardDto.from(card));
-            }
-            participantDtos.add(new ParticipantDto(player.getName(), cardDtos));
+            CardsDto cardsDto = CardsDto.fromCards(player.getCards());
+            participantDtos.add(new ParticipantDto(player.getName(), cardsDto));
         }
 
         return participantDtos;
@@ -42,11 +34,8 @@ public class ParticipantDto {
 
     public static List<ParticipantDto> from(Player player) {
         List<ParticipantDto> participantDtos = new ArrayList<>();
-        List<CardDto> cardDtos = new ArrayList<>();
-        for (Card card : player.getCards()) {
-            cardDtos.add(CardDto.from(card));
-        }
-        participantDtos.add(new ParticipantDto(player.getName(), cardDtos));
+        CardsDto cardsDto = CardsDto.fromCards(player.getCards());
+        participantDtos.add(new ParticipantDto(player.getName(), cardsDto));
 
         return participantDtos;
     }
@@ -62,7 +51,7 @@ public class ParticipantDto {
         return name;
     }
 
-    public List<CardDto> getCardDtos() {
+    public CardsDto getCardsDto() {
         return cardDtos;
     }
 }

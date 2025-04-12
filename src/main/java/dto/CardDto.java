@@ -3,8 +3,8 @@ package dto;
 import model.card.Card;
 
 public class CardDto {
-    private String rank;
-    private String suit;
+    private final String rank;
+    private final String suit;
 
     public CardDto(String rank, String suit) {
         this.rank = rank;
