@@ -5,6 +5,7 @@ import model.participant.Dealer;
 import model.participant.Participants;
 import model.participant.Player;
 import model.participant.Players;
+import model.result.GameResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +53,20 @@ public class BlackjackGame {
         return new BlackjackGame(participants.giveCardToDealer(deck.draw()), deck);
     }
 
+    public Player getPlayer(String playerName) {
+        List<Player> players = participants.getPlayers();
+        for(Player player : players) {
+            if(player.getName().equals(playerName)) {
+                return player;
+            }
+        }
+        return null;
+    }
+
+    public List<GameResult> getResult() {
+        return participants.determineResults();
+    }
+
     public Participants getParticipants() {
         return participants;
     }
@@ -62,15 +77,5 @@ public class BlackjackGame {
 
     public List<Player> getPlayers(){
         return participants.getPlayers();
-    }
-
-    public Player getPlayer(String playerName) {
-        List<Player> players = participants.getPlayers();
-        for(Player player : players) {
-            if(player.getName().equals(playerName)) {
-                return player;
-            }
-        }
-        return null;
     }
 }

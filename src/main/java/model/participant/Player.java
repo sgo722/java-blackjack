@@ -3,11 +3,10 @@ package model.participant;
 import model.card.Card;
 import model.card.Cards;
 
-import java.util.List;
-
 public class Player extends Participant {
-    // 카드의 합이 21이하라면 카드를 뽑는다.
+    // 카드의 합이 21이하라면 카드를 뽑을 수 있다.
     private static final int CAN_DRAW = 21;
+    private static final int DEAD_LINE = 22;
 
     private final Name name;
     private final Cards cards;
@@ -47,5 +46,13 @@ public class Player extends Participant {
             return receive(card);
         }
         return this;
+    }
+
+    public boolean isBust() {
+        return cards.calculateScore() >= DEAD_LINE;
+    }
+
+    public int getTotalValue(){
+        return cards.calculateScore();
     }
 }

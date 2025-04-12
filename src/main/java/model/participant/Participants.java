@@ -1,7 +1,9 @@
 package model.participant;
 
 import model.card.Card;
+import model.result.GameResult;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Participants {
@@ -14,19 +16,27 @@ public class Participants {
         this.dealer = dealer;
     }
 
-    public List<Player> getPlayers() {
-        return players.getPlayers();
-    }
-
-    public Dealer getDealer() {
-        return dealer;
-    }
-
     public Participants giveCardToPlayer(String playerName, Card card) {
         return new Participants(players.giveCardTo(playerName, card), dealer);
     }
 
     public Participants giveCardToDealer(Card card) {
         return new Participants(players, dealer.receive(card));
+    }
+
+    public List<GameResult> determineResults() {
+        List<GameResult> results = new ArrayList<>();
+        for (Player player : players.getPlayers()) {
+            results.add(GameResult.of(player,dealer));
+        }
+        return results;
+    }
+
+    public List<Player> getPlayers() {
+        return players.getPlayers();
+    }
+
+    public Dealer getDealer() {
+        return dealer;
     }
 }

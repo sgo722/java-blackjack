@@ -1,8 +1,6 @@
 package view;
 
-import dto.CardDto;
-import dto.CardsDto;
-import dto.ParticipantDto;
+import dto.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -64,6 +62,16 @@ public class OutputView {
             System.out.print(cardsDto.getTotalValue());
 
             System.out.println();
+        }
+    }
+
+    public static void printFinalResults(DealerResultDto dealerDto, List<PlayerResultDto> playerDtos) {
+        System.out.println();
+        System.out.println("## 최종 승패");
+        System.out.println(dealerDto.display());
+
+        for (PlayerResultDto playerDto : playerDtos) {
+            System.out.println(playerDto.getPlayerName() + ": " + playerDto.getResult());
         }
     }
 }

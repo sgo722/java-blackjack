@@ -1,12 +1,17 @@
 package controller;
 
+import dto.DealerResultDto;
 import dto.ParticipantDto;
+import dto.PlayerResultDto;
 import model.card.Deck;
 import model.game.BlackjackGame;
 import model.participant.Player;
 import model.participant.Players;
+import model.result.GameResult;
 import view.InputView;
 import view.OutputView;
+
+import java.util.List;
 
 public class BlackjackGameController {
     // 블랙잭 게임을 제어한다.
@@ -15,6 +20,7 @@ public class BlackjackGameController {
     public void start(){
         init();
         draw();
+        result();
     }
 
     private void init(){
@@ -26,7 +32,6 @@ public class BlackjackGameController {
     }
 
     private void draw(){
-        // 사람 한명잡고 받을거임? 안받으면 다음사람
         for(Player player : blackjackGame.getPlayers()){
             while(blackjackGame.getPlayer(player.getName()).canDraw()) {
                 String op = InputView.printDrawMore(player.getName());
@@ -45,5 +50,13 @@ public class BlackjackGameController {
         }
 
         OutputView.printResult(ParticipantDto.from(blackjackGame.getParticipants()));
+    }
+
+    private void result(){
+        List<GameResult> results = blackjackGame.getResult();
+        DealerResultDto dealerResultDto = DealerResultDto.from(results);
+        List<PlayerResultDto> playerResultDtos = PlayerResultDto.from(results);
+
+        OutputView.printFinalResults(dealerResultDto, playerResultDtos);
     }
 }
