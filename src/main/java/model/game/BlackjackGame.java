@@ -44,9 +44,12 @@ public class BlackjackGame {
         return dealer.receive(deck.draw());
     }
 
-
     public BlackjackGame giveCardToPlayer(String playerName) {
         return new BlackjackGame(participants.giveCardToPlayer(playerName, deck.draw()),deck);
+    }
+
+    public BlackjackGame giveCardToDealer() {
+        return new BlackjackGame(participants.giveCardToDealer(deck.draw()), deck);
     }
 
     public Participants getParticipants() {

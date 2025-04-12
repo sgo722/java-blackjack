@@ -44,7 +44,6 @@ public class Player extends Participant {
 
     public Player giveCardIfMatches(String playerName, Card card) {
         if(playerName.equals(name.getName())){
-            System.out.println(card.getValue());
             return receive(card);
         }
         return this;

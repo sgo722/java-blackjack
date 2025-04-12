@@ -25,4 +25,8 @@ public class Participants {
     public Participants giveCardToPlayer(String playerName, Card card) {
         return new Participants(players.giveCardTo(playerName, card), dealer);
     }
+
+    public Participants giveCardToDealer(Card card) {
+        return new Participants(players, dealer.receive(card));
+    }
 }

@@ -39,5 +39,9 @@ public class BlackjackGameController {
                 }
             }
         }
+        while(blackjackGame.getDealer().canDraw()) {
+            OutputView.printReceiveCardToDealer();
+            blackjackGame = blackjackGame.giveCardToDealer();
+        }
     }
 }
