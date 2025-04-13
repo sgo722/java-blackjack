@@ -36,7 +36,7 @@ class BlackjackGameTest {
         }
     }
 
-    @DisplayName("추가 카드 수령 시 카드 수가 늘어난다.")
+    @DisplayName("추가 카드 수령 시 카드 수가 늘어난다")
     @Test
     void drawMoreCard(){
         //given
