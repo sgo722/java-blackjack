@@ -163,9 +163,12 @@ Cards - 카드 일급 컬렉션
 9. 리팩터링
    1. 컨트롤러
       1. 카드 지급메서드 로직을 변경했다.  
-         while(blackjackGame.getPlayer(player.getName().canDraw())) -> while(blackjackGame.canDraw(player.getName()))  
+         blackjackGame.getPlayer(player.getName().canDraw()) -> blackjackGame.canDraw(player.getName())  
          이렇게 로직을 짜야 player라는 캡슐화가 유지될 수 있다고 생각했다.  
          막상 바꿔보니 로직도 더 깔끔해지고 객체에게 메세지를 던진다는 느껴졌다.
+         1. 추가적으로 딜러의 상태 조회하는 메서드명도 변경했다.
+            blackjackGame.getDealer().isDrawingRequired() -> blackjackGame.dealerMustDraw()로 변경했다.  
+            Dealer의 캡슐화를 보장할 수 있다고 생각한다.
       2. 카드 지급 메서드가 현재 depth가 3이라서 1로 줄여보려고 해야겠다. [수정전]
          1. 수령여부에 대한 사용자 응답에 "y" 혹은 "n"를 분기하는 로직은 Command라는 enum을 적용해서 바꿔보려고 해야곘다.
    2. Participants

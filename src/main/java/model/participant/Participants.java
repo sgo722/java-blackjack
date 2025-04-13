@@ -47,4 +47,8 @@ public class Participants {
     public Player findPlayer(String playerName) {
         return players.findPlayer(playerName);
     }
+
+    public boolean dealerMustDraw() {
+        return dealer.isDrawingRequired();
+    }
 }

@@ -32,6 +32,19 @@ public class BlackjackGameController {
     }
 
     private void draw(){
+        drawToPlayers();
+        drawToDealer();
+        printFinalResult();
+    }
+
+    private void drawToDealer() {
+        while(blackjackGame.dealerMustDraw()) {
+            OutputView.printReceiveCardToDealer();
+            blackjackGame = blackjackGame.giveCardToDealer();
+        }
+    }
+
+    private void drawToPlayers() {
         for(Player player : blackjackGame.getPlayers()){
             while(blackjackGame.canDraw(player.getName())) {
                 String op = InputView.printDrawMore(player.getName());
@@ -44,11 +57,9 @@ public class BlackjackGameController {
                 }
             }
         }
-        while(blackjackGame.getDealer().isDrawingRequired()) {
-            OutputView.printReceiveCardToDealer();
-            blackjackGame = blackjackGame.giveCardToDealer();
-        }
+    }
 
+    private void printFinalResult() {
         OutputView.printResult(ParticipantDto.from(blackjackGame.getParticipants()));
     }
 

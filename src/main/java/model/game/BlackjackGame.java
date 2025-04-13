@@ -76,4 +76,8 @@ public class BlackjackGame {
     public List<Player> getPlayers(){
         return participants.getPlayers();
     }
+
+    public boolean dealerMustDraw() {
+        return participants.dealerMustDraw();
+    }
 }
