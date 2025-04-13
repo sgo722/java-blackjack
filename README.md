@@ -122,7 +122,7 @@ Cards - 카드 일급 컬렉션
                   2. 아니면 현재 상황에서 Player만으로 어떻게 Participant 객체를 만드는 방법이 있을까? Participants는 Dealer와 Players를 가진 객체다.
                      1. Dealder와 Players 모두에게 필요한 로직이라면 Participants 객체에 책임을 주지 않을 이유가 없다.
                      2. Participants에게 메시지를 보내면 됐던 상황에서 BlackjackGame과 Players/Dealers 간에 강한 결합이 생긴다.
-                        1. BlackjackGame에서 Players와 Dealer의 메서드를 호출해서 초기 카드를 지급하고 있었는데 이 책임도 Pariticipants로 넘겨도 될 것 같다는 생각이 들었다.[수정전]
+                        1. BlackjackGame에서 Players와 Dealer의 메서드를 호출해서 초기 카드를 지급하고 있었는데 이 책임도 Pariticipants로 넘겨도 될 것 같다는 생각이 들었다.[수정완료 - 상태유지]
                            1. Participants로 초기카드를 넘기게 되면 Deck을 알게해야하나 Card를 알게해야하나?
                               1. 현재 Deck은 가변인데, Deck을 알게한다고 했을 떄 Pariticipants -> BlackjackGame으로 DrawResult(card + Deck)을 넘겨주는 방식으로 불변으로 구현할 수 있겠다.
                               2. BlackjackGame에서 deck.draw()로 카드를 뽑아 Participants로 Card를 넘겨주는 방식으로 하는건 어떤가?
@@ -171,7 +171,7 @@ Cards - 카드 일급 컬렉션
          1. 추가적으로 딜러의 상태 조회하는 메서드명도 변경했다.
             blackjackGame.getDealer().isDrawingRequired() -> blackjackGame.dealerMustDraw()로 변경했다.  
             Dealer의 캡슐화를 보장할 수 있다고 생각한다.
-      2. 카드 지급 메서드가 현재 depth가 3이라서 1로 줄여보려고 해야겠다. [수정전]
+      2. 카드 지급 메서드가 현재 depth가 3이라서 1로 줄여보려고 해야겠다. [수정 실패]
          1. 수령여부에 대한 사용자 응답에 "y" 혹은 "n"를 분기하는 로직은 Command라는 enum을 적용해서 바꿔보려고 해야곘다.
    2. Participants
       1. Player와 Dealer 공통메서드를 분리해야함[수정완료]
@@ -189,6 +189,8 @@ Cards - 카드 일급 컬렉션
             근데 이번에는 뽑았다라는 메서드로부터 뽑은 카드와 한장이 줄어든 덱을 반환해야했다. 어떻게 해야할까?
             1. DrawResult라는 객체를 생성해 Card와 Deck을 반환하도록 만들었다.
                1. 이후 depth를 1로 만들려다보니 DrawInitialResult, DrawPlayersResult라는 객체를 추가하게 되었다.
+   5. Cards
+      1. 총합 계산 depth 2 -> depth 1로 변경
 
 10. 테스트
     1. assertThat으로 여러개 테스트하는 상황에서는 assertAll로 테스트해야 중간에 꺠져도 진행된다는 것을 읽어서 적용해보았다.

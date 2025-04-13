@@ -28,18 +28,19 @@ public class Cards {
         return Collections.unmodifiableList(cards);
     }
 
-    public int calculateScore(){
-        int score = 0;
-        boolean hasA = false;
-        for (Card card : cards) {
-            if(card.isAce()) hasA = true;
-            score += card.getValue();
-        }
+    public int calculateScore() {
+        int score = cards.stream()
+                .mapToInt(Card::getValue)
+                .sum();
 
-        if(hasA && score <= 11){
+        if (hasAce() && score <= 11) {
             score += 10;
         }
 
         return score;
+    }
+
+    private boolean hasAce() {
+        return cards.stream().anyMatch(Card::isAce);
     }
 }
