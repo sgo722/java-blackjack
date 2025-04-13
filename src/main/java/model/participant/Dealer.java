@@ -20,7 +20,7 @@ public class Dealer extends Participant {
         return new Dealer(cards.add(draw));
     }
 
-    public boolean canDraw() {
+    public boolean isDrawingRequired() {
         return cards.calculateScore() <= CAN_DRAW;
     }
 

@@ -172,7 +172,7 @@ Cards - 카드 일급 컬렉션
       1. Player와 Dealer 공통메서드를 분리해야함[수정함]
          2. Participants로 canDraw()메서드를 분리할까 말까 고민이 되는 지점이었다.  
             Player는 "받을 수 있는 선택 조건"이고, Dealer는 "받아야만하는 조건"이라는 도메인 의미의 차이때문에 분리하기로 결정했다.  
-            메서드 네이밍도 바꿔야겠다. Player는 canDraw() 메서드로, Dealer는 isDrawingRequired()로 바꿔야겠다.
+            메서드 네이밍도 바꿔야겠다. Player는 canDraw() 메서드로, Dealer는 isDrawingRequired()로 바꿔야겠다.[수정전]
    3. Players
       1. Players가 giveCardIfMatches(String playerName)을 호출하고 있었는데 이 메서드가 두가지 기능을 하고있다고 생각되는데  
          막상 줄이려고하니까 Players의 메서드 depth 2로 늘어난다. 일단 냅두자 [좋은 방법이 떠오르지 않음]
