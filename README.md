@@ -168,4 +168,8 @@ Cards - 카드 일급 컬렉션
          막상 바꿔보니 로직도 더 깔끔해지고 객체에게 메세지를 던진다는 느껴졌다.
       2. 카드 지급 메서드가 현재 depth가 3이라서 1로 줄여보려고 해야겠다. [수정전]
          1. 수령여부에 대한 사용자 응답에 "y" 혹은 "n"를 분기하는 로직은 Command라는 enum을 적용해서 바꿔보려고 해야곘다.
-   2. Player와 Dealer 공통메서드를 분리해야함[수정전]
+   2. Participants
+      1. Player와 Dealer 공통메서드를 분리해야함[수정함]
+   3. Players
+      1. Players가 giveCardIfMatches(String playerName)을 호출하고 있었는데 이 메서드가 두가지 기능을 하고있다고 생각되는데  
+         막상 줄이려고하니까 Players의 메서드 depth 2로 늘어난다. 일단 냅두자 [좋은 방법이 떠오르지 않음]

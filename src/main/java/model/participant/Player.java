@@ -4,21 +4,19 @@ import model.card.Card;
 import model.card.Cards;
 
 public class Player extends Participant {
-    // 카드의 합이 21이하라면 카드를 뽑을 수 있다.
     private static final int CAN_DRAW = 21;
-    private static final int DEAD_LINE = 22;
+    private static final int BUST = 22;
 
     private final Name name;
-    private final Cards cards;
 
     private Player(Name name) {
+        super(new Cards());
         this.name = name;
-        this.cards = new Cards();
     }
 
     public Player(Name name, Cards cards) {
+        super(cards);
         this.name = name;
-        this.cards = cards;
     }
 
     public static Player create(String name){
@@ -26,7 +24,7 @@ public class Player extends Participant {
     }
 
     public Player giveCardIfMatches(String playerName, Card card) {
-        if(hasName(playerName)){
+        if (hasName(playerName)) {
             return receive(card);
         }
         return this;
@@ -36,6 +34,7 @@ public class Player extends Participant {
         return name.isSame(playerName);
     }
 
+    @Override
     public Player receive(Card draw) {
         return new Player(name, cards.add(draw));
     }
@@ -44,19 +43,12 @@ public class Player extends Participant {
         return cards.calculateScore() <= CAN_DRAW;
     }
 
-    public boolean isBust() {
-        return cards.calculateScore() >= DEAD_LINE;
-    }
-
-    public int getTotalValue(){
-        return cards.calculateScore();
-    }
-
     public String getName() {
         return name.getName();
     }
 
-    public Cards getCards() {
-        return cards;
+    @Override
+    protected int bustThreshold() {
+        return BUST;
     }
 }
