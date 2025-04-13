@@ -1,0 +1,54 @@
+package model.participant;
+
+import model.card.Card;
+import model.result.GameResult;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Participants {
+
+    private final Players players;
+    private final Dealer dealer;
+
+    public Participants(Players players, Dealer dealer) {
+        this.players = players;
+        this.dealer = dealer;
+    }
+
+    public Participants giveCardToPlayer(String playerName, Card card) {
+        return new Participants(players.giveCardTo(playerName, card), dealer);
+    }
+
+    public Participants giveCardToDealer(Card card) {
+        return new Participants(players, dealer.receive(card));
+    }
+
+    public List<GameResult> determineResults() {
+        List<GameResult> results = new ArrayList<>();
+        for (Player player : players.getPlayerList()) {
+            results.add(GameResult.of(player,dealer));
+        }
+        return results;
+    }
+
+    public boolean canDraw(String playerName) {
+        return players.canDraw(playerName);
+    }
+
+    public boolean dealerMustDraw() {
+        return dealer.isDrawingRequired();
+    }
+
+    public Player findPlayer(String playerName) {
+        return players.findPlayer(playerName);
+    }
+
+    public List<Player> getPlayerList() {
+        return players.getPlayerList();
+    }
+
+    public Dealer getDealer() {
+        return dealer;
+    }
+}
