@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class NameTest {
 
     @ParameterizedTest
-    @DisplayName("플레이어_이름에는_특수문자가_포함되지_않는다")
+    @DisplayName("플레이어 이름에는 특수문자가 포함되지_않는다")
     @NullSource
     @ValueSource(strings = {"", " ", "   ", "john_doe", "hello!", "이름@", "abc#123"})
     void validateBanCharacter(String input) {
@@ -22,7 +22,7 @@ class NameTest {
     }
 
     @ParameterizedTest
-    @DisplayName("플레이어_이름_길이를_검증한다")
+    @DisplayName("플레이어 이름 길이를 검증한다")
     @ValueSource(strings = {"", "abcdefghijklmnop", "12345678901"})
     void validateLength(String input) {
         assertThrows(IllegalArgumentException.class, () -> new Name(input));
