@@ -39,4 +39,12 @@ public class Participants {
     public Dealer getDealer() {
         return dealer;
     }
+
+    public boolean canDraw(String playerName) {
+        return players.canDraw(playerName);
+    }
+
+    public Player findPlayer(String playerName) {
+        return players.findPlayer(playerName);
+    }
 }

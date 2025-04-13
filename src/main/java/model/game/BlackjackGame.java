@@ -53,14 +53,12 @@ public class BlackjackGame {
         return new BlackjackGame(participants.giveCardToDealer(deck.draw()), deck);
     }
 
-    public Player getPlayer(String playerName) {
-        List<Player> players = participants.getPlayers();
-        for(Player player : players) {
-            if(player.getName().equals(playerName)) {
-                return player;
-            }
-        }
-        return null;
+    public boolean canDraw(String playerName) {
+        return participants.canDraw(playerName);
+    }
+
+    public Player findPlayer(String playerName) {
+        return participants.findPlayer(playerName);
     }
 
     public List<GameResult> getResult() {

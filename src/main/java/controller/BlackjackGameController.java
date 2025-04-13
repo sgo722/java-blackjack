@@ -33,11 +33,11 @@ public class BlackjackGameController {
 
     private void draw(){
         for(Player player : blackjackGame.getPlayers()){
-            while(blackjackGame.getPlayer(player.getName()).canDraw()) {
+            while(blackjackGame.canDraw(player.getName())) {
                 String op = InputView.printDrawMore(player.getName());
                 if(op.equals("y")){
                     blackjackGame = blackjackGame.giveCardToPlayer(player.getName());
-                    OutputView.printCards(ParticipantDto.from(blackjackGame.getPlayer(player.getName())));
+                    OutputView.printCards(ParticipantDto.from(blackjackGame.findPlayer(player.getName())));
                 }
                 if(op.equals("n")){
                     break;

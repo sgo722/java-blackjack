@@ -36,6 +36,11 @@ public class Name {
         }
     }
 
+    public boolean isSame(String playerName) {
+        return playerName.equals(this.name);
+
+    }
+
     public String getName() {
         return name;
     }

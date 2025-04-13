@@ -37,6 +37,17 @@ public class Players {
         return players;
     }
 
+    public boolean canDraw(String playerName) {
+        return findPlayer(playerName).canDraw();
+    }
+
+    public Player findPlayer(String playerName) {
+        return players.stream()
+                .filter(player -> player.hasName(playerName))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("[ERROR] 플레이어를 찾을 수 없습니다"));
+    }
+
     public List<String> exportPlayerNames(){
         return players.stream()
                 .map(Player::getName)

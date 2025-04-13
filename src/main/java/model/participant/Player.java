@@ -25,27 +25,23 @@ public class Player extends Participant {
         return new Player(new Name(name));
     }
 
-    public String getName() {
-        return name.getName();
+    public Player giveCardIfMatches(String playerName, Card card) {
+        if(hasName(playerName)){
+            return receive(card);
+        }
+        return this;
+    }
+
+    public boolean hasName(String playerName) {
+        return name.isSame(playerName);
     }
 
     public Player receive(Card draw) {
         return new Player(name, cards.add(draw));
     }
 
-    public Cards getCards() {
-        return cards;
-    }
-
     public boolean canDraw() {
         return cards.calculateScore() <= CAN_DRAW;
-    }
-
-    public Player giveCardIfMatches(String playerName, Card card) {
-        if(playerName.equals(name.getName())){
-            return receive(card);
-        }
-        return this;
     }
 
     public boolean isBust() {
@@ -54,5 +50,13 @@ public class Player extends Participant {
 
     public int getTotalValue(){
         return cards.calculateScore();
+    }
+
+    public String getName() {
+        return name.getName();
+    }
+
+    public Cards getCards() {
+        return cards;
     }
 }
