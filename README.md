@@ -176,3 +176,7 @@ Cards - 카드 일급 컬렉션
    3. Players
       1. Players가 giveCardIfMatches(String playerName)을 호출하고 있었는데 이 메서드가 두가지 기능을 하고있다고 생각되는데  
          막상 줄이려고하니까 Players의 메서드 depth 2로 늘어난다. 일단 냅두자 [좋은 방법이 떠오르지 않음]
+
+10. 테스트
+    1. assertThat으로 여러개 테스트하는 상황에서는 assertAll로 테스트해야 중간에 꺠져도 진행된다는 것을 읽어서 적용해보았다.
+       Dealer 테스트에서 assertAll을 사용했다.
