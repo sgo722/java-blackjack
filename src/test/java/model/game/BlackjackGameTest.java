@@ -35,4 +35,20 @@ class BlackjackGameTest {
             assertThat(player.getCards().getCardList()).hasSize(2);
         }
     }
+
+    @DisplayName("추가 카드 수령 시 카드 수가 늘어난다.")
+    @Test
+    void drawMoreCard(){
+        //given
+        String playerName = "양";
+
+        List<String> playerNames = List.of(playerName);
+        Players players = Players.fromNames(playerNames);
+        Deck deck = new Deck();
+        BlackjackGame blackjackGame = BlackjackGame.create(players, deck);
+        //when
+        BlackjackGame drawBlackjackGame = blackjackGame.giveCardToPlayer(playerName);
+        //then
+        assertThat(drawBlackjackGame.findPlayer(playerName).getCards().getCardList()).hasSize(3);
+    }
 }
