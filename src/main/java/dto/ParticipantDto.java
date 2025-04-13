@@ -43,7 +43,7 @@ public class ParticipantDto {
     public static List<ParticipantDto> from(Participants participants) {
         List<ParticipantDto> participantDtos = new ArrayList<>();
         participantDtos.add(from(participants.getDealer()));
-        participantDtos.addAll(from(participants.getPlayers()));
+        participantDtos.addAll(from(participants.getPlayerList()));
         return participantDtos;
     }
 

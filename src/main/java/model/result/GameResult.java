@@ -24,11 +24,11 @@ public class GameResult {
         return new GameResult(player.getName(), Result.from(player.getTotalValue(), dealer.getTotalValue()));
     }
 
-    public String getPlayerName() {
-        return playerName;
-    }
-
     public String getResult() {
         return result.toDisplay();
+    }
+
+    public String getPlayerName() {
+        return playerName;
     }
 }

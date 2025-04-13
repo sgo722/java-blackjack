@@ -1,9 +1,7 @@
 package model.game;
 
-import model.card.Cards;
 import model.card.Deck;
 import model.participant.Dealer;
-import model.participant.Name;
 import model.participant.Player;
 import model.participant.Players;
 import org.junit.jupiter.api.DisplayName;
@@ -46,8 +44,10 @@ class BlackjackGameTest {
         Players players = Players.fromNames(playerNames);
         Deck deck = new Deck();
         BlackjackGame blackjackGame = BlackjackGame.create(players, deck);
+
         //when
         BlackjackGame drawBlackjackGame = blackjackGame.giveCardToPlayer(playerName);
+
         //then
         assertThat(drawBlackjackGame.findPlayer(playerName).getCards().getCardList()).hasSize(3);
     }

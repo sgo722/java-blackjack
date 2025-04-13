@@ -32,23 +32,23 @@ public class Participants {
         return results;
     }
 
-    public List<Player> getPlayers() {
-        return players.getPlayers();
-    }
-
-    public Dealer getDealer() {
-        return dealer;
-    }
-
     public boolean canDraw(String playerName) {
         return players.canDraw(playerName);
+    }
+
+    public boolean dealerMustDraw() {
+        return dealer.isDrawingRequired();
     }
 
     public Player findPlayer(String playerName) {
         return players.findPlayer(playerName);
     }
 
-    public boolean dealerMustDraw() {
-        return dealer.isDrawingRequired();
+    public List<Player> getPlayerList() {
+        return players.getPlayers();
+    }
+
+    public Dealer getDealer() {
+        return dealer;
     }
 }

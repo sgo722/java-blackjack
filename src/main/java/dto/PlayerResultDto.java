@@ -6,7 +6,7 @@ import java.util.List;
 
 public class PlayerResultDto {
     private final String playerName;
-    private final String result; // "승", "패", "무"
+    private final String result;
 
     public PlayerResultDto(String playerName, String result) {
         this.playerName = playerName;

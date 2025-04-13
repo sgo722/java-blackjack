@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BlackjackGame {
-    // 블랙잭 결과를 비교한다.
+    // 블랙잭 도메인의 상태변경과 흐름을 조율한다.
     private final Participants participants;
     private final Deck deck;
 
@@ -57,6 +57,10 @@ public class BlackjackGame {
         return participants.canDraw(playerName);
     }
 
+    public boolean dealerMustDraw() {
+        return participants.dealerMustDraw();
+    }
+
     public Player findPlayer(String playerName) {
         return participants.findPlayer(playerName);
     }
@@ -74,10 +78,6 @@ public class BlackjackGame {
     }
 
     public List<Player> getPlayers(){
-        return participants.getPlayers();
-    }
-
-    public boolean dealerMustDraw() {
-        return participants.dealerMustDraw();
+        return participants.getPlayerList();
     }
 }

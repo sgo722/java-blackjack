@@ -29,6 +29,7 @@ class PlayersTest {
         )));
         Players players = Players.from(List.of(playerA, playerB));
         int totalValue = playerA.getTotalValue();
+
         //when
         Player findPlayer = players.findPlayer("yang");
 

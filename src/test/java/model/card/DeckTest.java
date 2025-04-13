@@ -16,7 +16,7 @@ class DeckTest {
         //given
         Deck deck = new Deck();
 
-        //when
+        //when - then
         assertThat(deck.size()).isEqualTo(52);
     }
 
@@ -26,7 +26,7 @@ class DeckTest {
         //given
         Deck deck = new Deck(new Stack<>());
 
-        //when
+        //when - then
         Assertions.assertThrows(IllegalArgumentException.class, deck::draw);
     }
 }

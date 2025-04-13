@@ -52,22 +52,28 @@ class CardsTest {
     @DisplayName("A 두 장과 5는 A를 1과 11로 계산해서 17점")
     @Test
     void aceAceFiveReturn21() {
+        //given
         Cards cards = new Cards(List.of(
                 new Card(Suit.SPADE, Rank.ACE),
                 new Card(Suit.HEART, Rank.ACE),
                 new Card(Suit.CLUB, Rank.FIVE)
         ));
+
+        //when - then
         assertThat(cards.calculateScore()).isEqualTo(17);
     }
 
     @DisplayName("숫자 카드만 있을 경우 정수 합산")
     @Test
     void twoThreeFourReturn9() {
+        //given
         Cards cards = new Cards(List.of(
                 new Card(Suit.SPADE, Rank.TWO),
                 new Card(Suit.HEART, Rank.THREE),
                 new Card(Suit.CLUB, Rank.FOUR)
         ));
+
+        //when - then
         assertThat(cards.calculateScore()).isEqualTo(9);
     }
 }

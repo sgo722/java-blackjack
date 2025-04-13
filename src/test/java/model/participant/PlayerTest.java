@@ -32,50 +32,66 @@ class PlayerTest {
     @DisplayName("플레이어 카드 점수가 22 이상이면 bust 상태이다")
     @Test
     void bust() {
+        //given
         Cards cards = new Cards(List.of(
                 new Card(Suit.HEART, Rank.KING),
                 new Card(Suit.SPADE, Rank.QUEEN),
                 new Card(Suit.DIAMOND, Rank.TWO)
         ));
+
+        //when
         Player player = new Player(new Name("jun"), cards);
 
+        //then
         assertThat(player.isBust()).isTrue();
     }
 
     @DisplayName("플레이어 카드 점수가 21 이하일 때 추가 카드를 받을 수 있다")
     @Test
     void twentyOneCanDraw() {
+        //given
         Cards cards = new Cards(List.of(
                 new Card(Suit.HEART, Rank.NINE),
                 new Card(Suit.SPADE, Rank.ACE)
         ));
+
+        //when
         Player player = new Player(new Name("jun"), cards);
 
+        //then
         assertThat(player.canDraw()).isTrue();
     }
 
     @DisplayName("플레이어 카드 점수가 20이면 받을 수 있다.")
     @Test
     void twentyCanDraw() {
+        //given
         Cards cards = new Cards(List.of(
                 new Card(Suit.HEART, Rank.TEN),
                 new Card(Suit.SPADE, Rank.TEN)
         ));
+
+        //when
         Player player = new Player(new Name("jun"), cards);
 
+        //then
         assertThat(player.canDraw()).isTrue();
     }
 
     @DisplayName("플레이어 카드 점수가 22이면 받을 수 없다")
     @Test
     void twentyTwoCanNotDraw() {
+        //given
         Cards cards = new Cards(List.of(
                 new Card(Suit.SPADE, Rank.TEN),
                 new Card(Suit.HEART, Rank.TEN),
                 new Card(Suit.CLUB, Rank.TWO)
         ));
+
+        //when
         Player player = new Player(new Name("jun"), cards);
 
+        //then
         assertThat(player.canDraw()).isFalse();
     }
 }
