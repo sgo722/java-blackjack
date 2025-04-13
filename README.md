@@ -127,12 +127,13 @@ Cards - 카드 일급 컬렉션
                               1. 현재 Deck은 가변인데, Deck을 알게한다고 했을 떄 Pariticipants -> BlackjackGame으로 DrawResult(card + Deck)을 넘겨주는 방식으로 불변으로 구현할 수 있겠다.
                               2. BlackjackGame에서 deck.draw()로 카드를 뽑아 Participants로 Card를 넘겨주는 방식으로 하는건 어떤가?
                                  1. 카드 지급 흐름의 주도권을 누가 갖게 할 것인가? Participants 와 BlackjackGame 중 누가 갖게 할 것인가?
-                                    1. Participants가 가진다면 Players와 Dealer의 캡슐화를 지킬 수 있다고 생각한다.
+                                    1. Participants가 Deck을 가진다면 Players와 Dealer의 캡슐화를 지킬 수 있다고 생각한다.
                                        1. 이둘의 캡슐화를 지킨다면 어떤 부분이 좋다고 말할 수 있을까?
                                           1. BlackjackGame은 도메인 내부의 흐름을 제어한다는 한가지 책임에 집중할 수 있다.  
                                              이미 제어는 Controller단에서 하고 있기 떄문에 필요없는거 아닌가 싶었는데, Controller는 앱의 흐름을 제어하고, BlackjackGame은 도메인 규칙과 상태변화라는 흐름을 제어한다는 입장으로 생각해보았을 떄 차이가 있는 듯 했다.
-                                    2. BlackjackGame이 가진다면 게임 전체흐름을 조율할 수 있다? -> 이거 장점이 맞나...[애매함]
-                                       => Participants한테 객체를 넘겨주는 것으로 바꿔봐야겠다.[수정전]  
+                                    2. BlackjackGame이 Deck을 가진다면 게임 전체흐름을 조율할 수 있다? -> 이거 장점이 맞나...[애매함 -> 장점이 맞다는 결론]
+                                       1. BlackjackGame이 Deck의 흐름을 가지고 있어야 Deck의 변경전파가 일어나지 않을 거라고 생각했다.
+                                          1. BlackjackGame이 Deck을 알고, Participants는 Card를 아는 방법으로 구현했다.
          => 컨트롤러 단에서부터 플레이어 이름으로 조회해서 바꾸던 중 카드를 받고나서 player.canDraw()가 제대로 작동하지 않았다.  
             외부 객체와 카드를 받은 Player객체가 다른 것을 가리키고 있어 문제가 되었다.  
             사진으로 코드를 올려놨다. 불변객체를 참조하는 방식으로 바꿔 해결 할 수 있었다.
@@ -141,6 +142,7 @@ Cards - 카드 일급 컬렉션
          초반에 컨트롤러에 Dealer라는 객체 존재자체도 모르게하려고, new Dealer로 BlackjackGame 내부에서 정팩메를 사용해서 주입하고 있었다.  
          이 행동이 무의미해졌다고 봐야할까?
          1. 무의미하진 않다고 생각한다. 딜러가 있다는 것은 알겠지만 딜러라는 객체에 대해선 전혀모르는 상태니까 문제없다고 생각한다.
+
 6. 입력
    1. 현재 내 입력은 구분자가 마지막에 들어가는 경우 예외처리가 되지 않고있다.[수정전]
 
@@ -179,6 +181,14 @@ Cards - 카드 일급 컬렉션
    3. Players
       1. Players가 giveCardIfMatches(String playerName)을 호출하고 있었는데 이 메서드가 두가지 기능을 하고있다고 생각되는데  
          막상 줄이려고하니까 Players의 메서드 depth 2로 늘어난다. 일단 냅두자 [좋은 방법이 떠오르지 않음]
+
+   4. Deck
+      1. Deck을 가변객체 -> 불변객체로 변경했다.
+         1. 변경하면서 deck.draw()의 반환 객체로 뭘 반환해야할까?  
+            원래는 자신의 필드 값이 변경된 자기 스스로 생성자를 호출하면서 불변을 유지하는 방식을 주로 사용했었다.  
+            근데 이번에는 뽑았다라는 메서드로부터 뽑은 카드와 한장이 줄어든 덱을 반환해야했다. 어떻게 해야할까?
+            1. DrawResult라는 객체를 생성해 Card와 Deck을 반환하도록 만들었다.
+               1. 이후 depth를 1로 만들려다보니 DrawInitialResult, DrawPlayersResult라는 객체를 추가하게 되었다.
 
 10. 테스트
     1. assertThat으로 여러개 테스트하는 상황에서는 assertAll로 테스트해야 중간에 꺠져도 진행된다는 것을 읽어서 적용해보았다.

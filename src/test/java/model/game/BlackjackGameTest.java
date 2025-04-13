@@ -18,10 +18,9 @@ class BlackjackGameTest {
         // given
         List<String> playerNames = List.of("양", "준");
         Players players = Players.fromNames(playerNames);
-        Deck deck = new Deck();
 
         // when
-        BlackjackGame blackjackGame = BlackjackGame.create(players, deck);
+        BlackjackGame blackjackGame = BlackjackGame.create(players);
 
         // then
         Dealer dealer = blackjackGame.getDealer();
@@ -42,8 +41,7 @@ class BlackjackGameTest {
 
         List<String> playerNames = List.of(playerName);
         Players players = Players.fromNames(playerNames);
-        Deck deck = new Deck();
-        BlackjackGame blackjackGame = BlackjackGame.create(players, deck);
+        BlackjackGame blackjackGame = BlackjackGame.create(players);
 
         //when
         BlackjackGame drawBlackjackGame = blackjackGame.giveCardToPlayer(playerName);

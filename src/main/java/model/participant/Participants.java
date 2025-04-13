@@ -26,7 +26,7 @@ public class Participants {
 
     public List<GameResult> determineResults() {
         List<GameResult> results = new ArrayList<>();
-        for (Player player : players.getPlayers()) {
+        for (Player player : players.getPlayerList()) {
             results.add(GameResult.of(player,dealer));
         }
         return results;
@@ -45,7 +45,7 @@ public class Participants {
     }
 
     public List<Player> getPlayerList() {
-        return players.getPlayers();
+        return players.getPlayerList();
     }
 
     public Dealer getDealer() {

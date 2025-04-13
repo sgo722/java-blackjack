@@ -33,7 +33,7 @@ public class Players {
                 .toList();
     }
 
-    public List<Player> getPlayers() {
+    public List<Player> getPlayerList() {
         return players;
     }
 

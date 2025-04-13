@@ -1,5 +1,7 @@
 package model.card;
 
+import model.card.draw.DrawCardResult;
+
 import java.util.Collections;
 import java.util.Stack;
 
@@ -28,11 +30,13 @@ public class Deck {
         return deck;
     }
 
-    public Card draw() {
+    public DrawCardResult draw() {
         if(deck.isEmpty()) {
             throw new IllegalArgumentException("[ERROR] 카드가 부족합니다.");
         }
-        return deck.pop();
+
+        Card drawCard = deck.pop();
+        return new DrawCardResult(drawCard, new Deck(deck));
     }
 
     public int size(){

@@ -3,7 +3,6 @@ package controller;
 import dto.DealerResultDto;
 import dto.ParticipantDto;
 import dto.PlayerResultDto;
-import model.card.Deck;
 import model.game.BlackjackGame;
 import model.participant.Player;
 import model.participant.Players;
@@ -25,7 +24,7 @@ public class BlackjackGameController {
 
     private void init(){
         Players players = Players.fromNames(InputView.inputPlayerNames());
-        blackjackGame = BlackjackGame.create(players, new Deck());
+        blackjackGame = BlackjackGame.create(players);
         OutputView.printSplitCard(players.exportPlayerNames());
         OutputView.printInitialDealerCard(ParticipantDto.from(blackjackGame.getDealer()));
         OutputView.printCards(ParticipantDto.from(blackjackGame.getPlayers()));

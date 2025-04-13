@@ -1,6 +1,9 @@
 package model.game;
 
 import model.card.Deck;
+import model.card.draw.DrawInitialResult;
+import model.card.draw.DrawPlayersResult;
+import model.card.draw.DrawCardResult;
 import model.participant.Dealer;
 import model.participant.Participants;
 import model.participant.Player;
@@ -20,37 +23,49 @@ public class BlackjackGame {
         this.deck = deck;
     }
 
-    public static BlackjackGame create(Players players, Deck deck) {
+    public static BlackjackGame create(Players players) {
+        Deck newDeck = new Deck();
         Dealer dealer = new Dealer();
 
-        for(int drawCount = 0; drawCount < 2; drawCount++) {
-            players = giveCardToPlayers(players, deck);
-            dealer = giveCardToDealer(dealer, deck);
-        }
+        DrawInitialResult initialResult = drawInitialCardToParticipants(players, newDeck, dealer);
 
-        return new BlackjackGame(new Participants(players, dealer), deck);
+        return new BlackjackGame(new Participants(initialResult.players(), initialResult.dealer()), initialResult.newDeck());
     }
 
-    private static Players giveCardToPlayers(Players players, Deck deck) {
-        List<Player> drawPlayers = new ArrayList<>();
+    private static DrawInitialResult drawInitialCardToParticipants(Players players, Deck newDeck, Dealer dealer) {
+        for (int drawCount = 0; drawCount < 2; drawCount++) {
+            DrawPlayersResult playersResult = dealOneCardToEachPlayer(players, newDeck);
+            players = playersResult.players();
+            newDeck = playersResult.deck();
 
-        for(Player player : players.getPlayers()) {
-            drawPlayers.add(player.receive(deck.draw()));
+            DrawCardResult dealerResult = newDeck.draw();
+            dealer = dealer.receive(dealerResult.card());
+            newDeck = dealerResult.nextDeck();
         }
-
-        return Players.from(drawPlayers);
+        return new DrawInitialResult(players, newDeck, dealer);
     }
 
-    private static Dealer giveCardToDealer(Dealer dealer, Deck deck) {
-        return dealer.receive(deck.draw());
+    private static DrawPlayersResult dealOneCardToEachPlayer(Players players, Deck deck) {
+        List<Player> updatedPlayers = new ArrayList<>();
+        Deck currentDeck = deck;
+
+        for (Player player : players.getPlayerList()) {
+            DrawCardResult result = currentDeck.draw();
+            updatedPlayers.add(player.receive(result.card()));
+            currentDeck = result.nextDeck();
+        }
+
+        return new DrawPlayersResult(Players.from(updatedPlayers), currentDeck);
     }
 
     public BlackjackGame giveCardToPlayer(String playerName) {
-        return new BlackjackGame(participants.giveCardToPlayer(playerName, deck.draw()),deck);
+        DrawCardResult drawCardResult = deck.draw();
+        return new BlackjackGame(participants.giveCardToPlayer(playerName, drawCardResult.card()), drawCardResult.nextDeck());
     }
 
     public BlackjackGame giveCardToDealer() {
-        return new BlackjackGame(participants.giveCardToDealer(deck.draw()), deck);
+        DrawCardResult drawCardResult = deck.draw();
+        return new BlackjackGame(participants.giveCardToDealer(drawCardResult.card()), drawCardResult.nextDeck());
     }
 
     public boolean canDraw(String playerName) {
