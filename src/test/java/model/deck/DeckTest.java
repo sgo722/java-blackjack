@@ -23,9 +23,9 @@ class DeckTest {
         assertThat(deck.size()).isEqualTo(52);
     }
 
-    @DisplayName("덱에 카드가 없으면 예외가 발생한다")
+    @DisplayName("덱에서 한장을 뽑으면 카드가 줄어든다")
     @Test
-    void emptyDeck(){
+    void draw(){
         //given
         Deck deck = new Deck();
 
@@ -33,6 +33,6 @@ class DeckTest {
         deck.draw();
 
         // then
-        Assertions.(deck.siz)
+        assertThat(deck.size()).isEqualTo(51);
     }
 }

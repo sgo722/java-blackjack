@@ -17,11 +17,6 @@ public class Dealer extends Participant {
         return new Dealer(new Cards(cards));
     }
 
-    @Override
-    public void receive(Card draw) {
-        cards.add(draw);
-    }
-
     public boolean isDrawingRequired() {
         return cards.calculateScore() <= CAN_DRAW;
     }

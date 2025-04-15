@@ -4,9 +4,7 @@ import model.deck.DeckManager;
 import model.participant.Dealer;
 import model.participant.Player;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class BlackjackGame {
@@ -40,7 +38,7 @@ public class BlackjackGame {
         return Dealer.receiveInitialCard(deckManager.drawTwoCard());
     }
 
-    public List<String> getPlayers() {
+    public List<String> getPlayerNames() {
         return players.stream()
                 .map(Player::getName)
                 .toList();
@@ -56,7 +54,53 @@ public class BlackjackGame {
                 ));
     }
 
+    public Map<String, List<String>> getCardsOf(String playerName) {
+        Player player = players.stream()
+                .filter(p -> p.getName().equals(playerName))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("[ERROR] 플레이어 이름을 찾을 수 없습니다."));
+
+        return Map.of(player.getName(), player.getCards());
+    }
+
     public List<String> getDealerCards() {
         return dealer.getCards();
+    }
+
+    public boolean carPlayerDraw(String playerName) {
+        return players.stream()
+                .filter(player -> player.getName().equals(playerName))
+                .findFirst()
+                .map(Player::canDraw)
+                .orElseThrow(() -> new IllegalArgumentException("[ERROR] 플레이어 이름을 찾을 수 없습니다."));
+    }
+
+    public void giveCardTo(String playerName) {
+        Player findPlayer = players.stream()
+                .filter(player -> player.getName().equals(playerName))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("[ERROR] 해당 이름의 플레이어를 찾을 수 없습니다."));
+
+        findPlayer.receive(deckManager.drawCard());
+    }
+
+    public boolean isDealerDrawingRequired() {
+        return dealer.isDrawingRequired();
+    }
+
+    public void giveCardToDealer() {
+        dealer.receive(deckManager.drawCard());
+    }
+
+    public int getDealerTotalValue() {
+        return dealer.getTotalValue();
+    }
+
+    public Map<String, Integer> getPlayerTotalValue() {
+        return players.stream()
+                .collect(Collectors.toMap(
+                        Player::getName,
+                        Player::getTotalValue
+                ));
     }
 }

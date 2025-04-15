@@ -6,7 +6,7 @@ import model.card.Cards;
 import java.util.List;
 
 public abstract class Participant {
-    protected final Cards cards;
+    protected Cards cards;
 
     protected Participant(Cards cards) {
         this.cards = cards;
@@ -24,7 +24,9 @@ public abstract class Participant {
         return cards.calculateScore() >= bustThreshold();
     }
 
-    protected abstract int bustThreshold();
+    public void receive(Card draw) {
+        cards = cards.add(draw);
+    }
 
-    public abstract void receive(Card card);
+    protected abstract int bustThreshold();
 }

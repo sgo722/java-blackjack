@@ -20,15 +20,6 @@ public class Player extends Participant {
         return new Player(new Name(name), new Cards(cards));
     }
 
-    public boolean hasName(String playerName) {
-        return name.isSame(playerName);
-    }
-
-    @Override
-    public void receive(Card draw) {
-        cards.add(draw);
-    }
-
     public boolean canDraw() {
         return cards.calculateScore() <= CAN_DRAW;
     }
