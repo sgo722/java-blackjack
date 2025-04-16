@@ -11,18 +11,16 @@ public class OutputView {
         System.out.println("에게 2장을 나누었습니다.");
     }
 
-    public static void printDealerCardList(List<String> dealerCards) {
+    public static void printDealerInitialCard(List<String> dealerCards) {
         System.out.print("딜러카드: ");
 
-        String cardList = String.join(", ", dealerCards);
-        System.out.println(cardList);
+        System.out.println(dealerCards.get(0));
     }
 
     public static void printPlayersCardList(Map<String, List<String>> playersCards) {
 
-        for(Map.Entry<String, List<String>> entry : playersCards.entrySet()) {
-            String playerName = entry.getKey();
-            List<String> playerCardList = entry.getValue();
+        for(String playerName : playersCards.keySet()){
+            List<String> playerCardList = playersCards.get(playerName);
             String cardList = String.join(", ", playerCardList);
 
             System.out.print(playerName);
@@ -39,7 +37,7 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printResultOfDealer(List<String> dealerCards, int totalValue) {
+    public static void printDealerCardsWithTotalValue(List<String> dealerCards, int totalValue) {
         System.out.print("딜러카드: ");
 
         String cardList = String.join(", ", dealerCards);
@@ -50,11 +48,10 @@ public class OutputView {
         System.out.println(totalValue);
     }
 
-    public static void printResultOfPlayers(Map<String, List<String>> playersCards, Map<String, Integer> playerNameTotalValue) {
-        for(Map.Entry<String, List<String>> entry : playersCards.entrySet()) {
-            String playerName = entry.getKey();
+    public static void printPlayersCardsWithTotalValue(Map<String, List<String>> playersCards, Map<String, Integer> playerNameTotalValue) {
+        for(String playerName : playersCards.keySet()) {
             int totalValue = playerNameTotalValue.get(playerName);
-            List<String> playerCardList = entry.getValue();
+            List<String> playerCardList = playersCards.get(playerName);
             String cardList = String.join(", ", playerCardList);
 
             System.out.print(playerName);
@@ -64,5 +61,32 @@ public class OutputView {
             System.out.print("결과 : ");
             System.out.println(totalValue);
         }
+    }
+
+    public static void printFinalResult() {
+        System.out.println();
+        System.out.println("## 최종 승패");
+    }
+
+    public static void printDealerResultSummary(List<Integer> dealerResultSummary) {
+        System.out.print("딜러");
+        System.out.print(" : ");
+        System.out.print(dealerResultSummary.get(0) + "승");
+        System.out.print(" ");
+        System.out.print(dealerResultSummary.get(1) + "무");
+        System.out.print(" ");
+        System.out.print(dealerResultSummary.get(2) + "패");
+        System.out.println();
+    }
+
+
+    public static void printPlayersResults(Map<String, String> playersResults) {
+        for(String playerName : playersResults.keySet()){
+            System.out.print(playerName);
+            System.out.print(" : ");
+            System.out.print(playersResults.get(playerName));
+            System.out.println();
+        }
+
     }
 }

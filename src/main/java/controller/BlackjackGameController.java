@@ -1,7 +1,6 @@
 package controller;
 
 import model.game.BlackjackGame;
-import model.participant.Player;
 import view.InputView;
 import view.OutputView;
 
@@ -11,7 +10,7 @@ public class BlackjackGameController {
         BlackjackGame blackjackGame = BlackjackGame.splitInitialCard(InputView.inputPlayerNames());
 
         OutputView.printSplitToPlayers(blackjackGame.getPlayerNames());
-        OutputView.printDealerCardList(blackjackGame.getDealerCards());
+        OutputView.printDealerInitialCard(blackjackGame.getDealerCards());
         OutputView.printPlayersCardList(blackjackGame.getPlayersCards());
 
         for(String player : blackjackGame.getPlayerNames()){
@@ -32,8 +31,17 @@ public class BlackjackGameController {
             OutputView.printReceiveCardToDealer();
             blackjackGame.giveCardToDealer();
         }
-        OutputView.printResultOfDealer(blackjackGame.getDealerCards(), blackjackGame.getDealerTotalValue());
-        OutputView.printResultOfPlayers(blackjackGame.getPlayersCards(), blackjackGame.getPlayerTotalValue());
+        OutputView.printDealerCardsWithTotalValue(blackjackGame.getDealerCards(), blackjackGame.getDealerTotalValue());
+        OutputView.printPlayersCardsWithTotalValue(blackjackGame.getPlayersCards(), blackjackGame.getPlayerTotalValue());
+
+        printFinalResults(blackjackGame);
+
+    }
+
+    private static void printFinalResults(BlackjackGame blackjackGame) {
+        OutputView.printFinalResult();
+        OutputView.printDealerResultSummary(blackjackGame.getDealerResultSummary());
+        OutputView.printPlayersResults(blackjackGame.getPlayersResults());
     }
 
 }

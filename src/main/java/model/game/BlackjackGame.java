@@ -3,6 +3,7 @@ package model.game;
 import model.deck.DeckManager;
 import model.participant.Dealer;
 import model.participant.Player;
+import model.result.GameResults;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -102,5 +103,19 @@ public class BlackjackGame {
                         Player::getName,
                         Player::getTotalValue
                 ));
+    }
+
+    public List<Integer> getDealerResultSummary(){
+        GameResults gameResults = determineResults();
+        return gameResults.getDealerResultSummary();
+    }
+
+    public Map<String, String> getPlayersResults(){
+        GameResults gameResults = determineResults();
+        return gameResults.getPlayerResultsDisplay();
+    }
+
+    private GameResults determineResults() {
+        return GameResults.of(players, dealer);
     }
 }
