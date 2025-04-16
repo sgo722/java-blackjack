@@ -16,6 +16,10 @@ public class Player extends Participant {
         this.name = name;
     }
 
+    public static Player fromName(String name) {
+        return new Player(new Name(name), new Cards());
+    }
+
     public static Player receiveInitialCard(String name, List<Card> cards) {
         return new Player(new Name(name), new Cards(cards));
     }

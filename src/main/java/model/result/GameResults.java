@@ -1,7 +1,7 @@
 package model.result;
 
 import model.participant.Dealer;
-import model.participant.Player;
+import model.participant.Players;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -16,8 +16,8 @@ public class GameResults {
         this.gameResults = gameResults;
     }
 
-    public static GameResults of(List<Player> players, Dealer dealer){
-        List<GameResult> gameResults = players.stream()
+    public static GameResults of(Players players, Dealer dealer){
+        List<GameResult> gameResults = players.getList().stream()
                 .map(player -> GameResult.of(player, dealer))
                 .toList();
         return new GameResults(gameResults);

@@ -47,7 +47,7 @@ public class BlackjackGameController {
     private static void drawUntilPlayerStop(String player, BlackjackGame blackjackGame) {
         boolean drawMore = true;
 
-        while(blackjackGame.carPlayerDraw(player) && drawMore){
+        while(blackjackGame.canPlayerDraw(player) && drawMore){
             DrawCommand command = DrawCommand.from(InputView.printDrawMore(player));
             drawMore = command.execute(player, blackjackGame);
             OutputView.printPlayersCardList(blackjackGame.getCardsOf(player));
