@@ -25,10 +25,6 @@ public class Cards {
         return new Cards(newCards);
     }
 
-    public List<Card> getCardList() {
-        return Collections.unmodifiableList(cards);
-    }
-
     public int calculateScore() {
         int score = cards.stream()
                 .mapToInt(Card::getValue)

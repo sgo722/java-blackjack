@@ -1,5 +1,6 @@
 package controller;
 
+import controller.command.DrawCommand;
 import model.game.BlackjackGame;
 import view.InputView;
 import view.OutputView;
@@ -7,35 +8,55 @@ import view.OutputView;
 public class BlackjackGameController {
 
     public void start(){
+        BlackjackGame blackjackGame = splitInitialCardsForAll();
+
+        drawAdditionalCards(blackjackGame);
+
+        printFinalCards(blackjackGame);
+
+        printFinalResults(blackjackGame);
+    }
+
+    private static BlackjackGame splitInitialCardsForAll() {
         BlackjackGame blackjackGame = BlackjackGame.splitInitialCard(InputView.inputPlayerNames());
 
         OutputView.printSplitToPlayers(blackjackGame.getPlayerNames());
         OutputView.printDealerInitialCard(blackjackGame.getDealerCards());
         OutputView.printPlayersCardList(blackjackGame.getPlayersCards());
+        return blackjackGame;
+    }
 
+    private static void drawAdditionalCards(BlackjackGame blackjackGame) {
+        drawCardsForAllPlayers(blackjackGame);
+        drawUntilDealerMustDraw(blackjackGame);
+    }
+
+    private static void drawCardsForAllPlayers(BlackjackGame blackjackGame) {
         for(String player : blackjackGame.getPlayerNames()){
-            while(blackjackGame.carPlayerDraw(player)){
-                String op = InputView.printDrawMore(player);
-                if(op.equals("y")){
-                    blackjackGame.giveCardTo(player);
-                    OutputView.printPlayersCardList(blackjackGame.getCardsOf(player));
-                }
-                if(op.equals("n")){
-                    OutputView.printPlayersCardList(blackjackGame.getCardsOf(player));
-                    break;
-                }
-            }
+            drawUntilPlayerStop(player, blackjackGame);
         }
+    }
 
+    private static void drawUntilDealerMustDraw(BlackjackGame blackjackGame) {
         while(blackjackGame.isDealerDrawingRequired()) {
             OutputView.printReceiveCardToDealer();
             blackjackGame.giveCardToDealer();
         }
+    }
+
+    private static void drawUntilPlayerStop(String player, BlackjackGame blackjackGame) {
+        boolean drawMore = true;
+
+        while(blackjackGame.carPlayerDraw(player) && drawMore){
+            DrawCommand command = DrawCommand.from(InputView.printDrawMore(player));
+            drawMore = command.execute(player, blackjackGame);
+            OutputView.printPlayersCardList(blackjackGame.getCardsOf(player));
+        }
+    }
+
+    private static void printFinalCards(BlackjackGame blackjackGame) {
         OutputView.printDealerCardsWithTotalValue(blackjackGame.getDealerCards(), blackjackGame.getDealerTotalValue());
         OutputView.printPlayersCardsWithTotalValue(blackjackGame.getPlayersCards(), blackjackGame.getPlayerTotalValue());
-
-        printFinalResults(blackjackGame);
-
     }
 
     private static void printFinalResults(BlackjackGame blackjackGame) {
@@ -43,5 +64,4 @@ public class BlackjackGameController {
         OutputView.printDealerResultSummary(blackjackGame.getDealerResultSummary());
         OutputView.printPlayersResults(blackjackGame.getPlayersResults());
     }
-
 }

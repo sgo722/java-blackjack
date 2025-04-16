@@ -1,6 +1,6 @@
 import controller.BlackjackGameController;
 
-public class BlackjackApplication {
+public class BlackjackGameApplication {
     public static void main(String[] args) {
         BlackjackGameController blackjackGameController = new BlackjackGameController();
         blackjackGameController.start();

@@ -39,35 +39,6 @@ public class BlackjackGame {
         return Dealer.receiveInitialCard(deckManager.drawTwoCard());
     }
 
-    public List<String> getPlayerNames() {
-        return players.stream()
-                .map(Player::getName)
-                .toList();
-    }
-
-    public Map<String, List<String>> getPlayersCards() {
-        return players.stream()
-                .collect(Collectors.toMap(
-                        Player::getName,
-                        Player::getCards,
-                        (existing, replacement) -> existing,
-                        LinkedHashMap::new
-                ));
-    }
-
-    public Map<String, List<String>> getCardsOf(String playerName) {
-        Player player = players.stream()
-                .filter(p -> p.getName().equals(playerName))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("[ERROR] 플레이어 이름을 찾을 수 없습니다."));
-
-        return Map.of(player.getName(), player.getCards());
-    }
-
-    public List<String> getDealerCards() {
-        return dealer.getCards();
-    }
-
     public boolean carPlayerDraw(String playerName) {
         return players.stream()
                 .filter(player -> player.getName().equals(playerName))
@@ -93,8 +64,33 @@ public class BlackjackGame {
         dealer.receive(deckManager.drawCard());
     }
 
-    public int getDealerTotalValue() {
-        return dealer.getTotalValue();
+    public Map<String, List<String>> getCardsOf(String playerName) {
+        Player player = players.stream()
+                .filter(p -> p.getName().equals(playerName))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("[ERROR] 플레이어 이름을 찾을 수 없습니다."));
+
+        return Map.of(player.getName(), player.getCards());
+    }
+
+    public List<String> getDealerCards() {
+        return dealer.getCards();
+    }
+
+    public Map<String, List<String>> getPlayersCards() {
+        return players.stream()
+                .collect(Collectors.toMap(
+                        Player::getName,
+                        Player::getCards,
+                        (existing, replacement) -> existing,
+                        LinkedHashMap::new
+                ));
+    }
+
+    public List<String> getPlayerNames() {
+        return players.stream()
+                .map(Player::getName)
+                .toList();
     }
 
     public Map<String, Integer> getPlayerTotalValue() {
@@ -105,14 +101,18 @@ public class BlackjackGame {
                 ));
     }
 
-    public List<Integer> getDealerResultSummary(){
-        GameResults gameResults = determineResults();
-        return gameResults.getDealerResultSummary();
+    public int getDealerTotalValue() {
+        return dealer.getTotalValue();
     }
 
     public Map<String, String> getPlayersResults(){
         GameResults gameResults = determineResults();
         return gameResults.getPlayerResultsDisplay();
+    }
+
+    public List<Integer> getDealerResultSummary(){
+        GameResults gameResults = determineResults();
+        return gameResults.getDealerResultSummary();
     }
 
     private GameResults determineResults() {

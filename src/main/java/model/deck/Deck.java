@@ -9,7 +9,7 @@ import java.util.Stack;
 
 public class Deck {
 
-    private Stack<Card> deck;
+    private final Stack<Card> deck;
 
     public Deck() {
         this.deck = generateDeck();
