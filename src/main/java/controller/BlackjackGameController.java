@@ -10,6 +10,8 @@ public class BlackjackGameController {
     public void start(){
         BlackjackGame blackjackGame = splitInitialCardsForAll();
 
+        printInitialCards(blackjackGame);
+
         drawAdditionalCards(blackjackGame);
 
         printFinalCards(blackjackGame);
@@ -18,12 +20,13 @@ public class BlackjackGameController {
     }
 
     private static BlackjackGame splitInitialCardsForAll() {
-        BlackjackGame blackjackGame = BlackjackGame.splitInitialCard(InputView.inputPlayerNames());
+        return BlackjackGame.splitInitialCard(InputView.inputPlayerNames());
+    }
 
+    private static void printInitialCards(BlackjackGame blackjackGame) {
         OutputView.printSplitToPlayers(blackjackGame.getPlayerNames());
         OutputView.printDealerInitialCard(blackjackGame.getDealerCards());
         OutputView.printPlayersCardList(blackjackGame.getPlayerNameToCards());
-        return blackjackGame;
     }
 
     private static void drawAdditionalCards(BlackjackGame blackjackGame) {
