@@ -39,7 +39,6 @@ class BlackjackGameTest {
         Map<String, List<String>> playerNameToCards = blackjackGame.getPlayerNameToCards();
 
         // then
-
         assertAll(
             () -> assertThat(playerNameToCards.get(playerNameA).size()).isEqualTo(2),
             () -> assertThat(playerNameToCards.get(playerNameB).size()).isEqualTo(2)
