@@ -19,28 +19,35 @@ class DealerTest {
     @Test
     void receiveCard() {
         //given
-        Dealer dealer = new Dealer(new Cards());
+        List<Card> initialCards = List.of(
+                new Card(Suit.HEART, Rank.TEN),
+                new Card(Suit.CLUB, Rank.THREE)
+        );
         Card card = new Card(Suit.CLUB, Rank.SIX);
+        Dealer dealer = Dealer.receiveInitialCard(initialCards);
 
         //when
          dealer.receive(card);
 
         //then
-        assertThat(dealer.getCards()).hasSize(1);
+        assertAll(
+            () -> assertThat(dealer.getCards()).hasSize(3),
+            () -> assertThat(dealer.getTotalValue()).isEqualTo(19)
+        );
     }
 
     @DisplayName("딜러는 카드 점수가 22 이상이면 bust 상태이다")
     @Test
     void dealer_is_bust() {
         //given
-        Cards cards = new Cards(List.of(
+        List<Card> initialCards = List.of(
                 new Card(Suit.HEART, Rank.TEN),
                 new Card(Suit.SPADE, Rank.TEN),
                 new Card(Suit.CLUB, Rank.THREE)
-        ));
+        );
 
         //when
-        Dealer dealer = new Dealer(cards);
+        Dealer dealer = Dealer.receiveInitialCard(initialCards);
 
         //then
         assertThat(dealer.isBust()).isTrue();
@@ -50,13 +57,13 @@ class DealerTest {
     @Test
     void sixteenIsRequiredCard() {
         //given
-        Cards cards = new Cards(List.of(
+        List<Card> initialCards = List.of(
                 new Card(Suit.HEART, Rank.SIX),
                 new Card(Suit.CLUB, Rank.TEN)
-        ));
+        );
 
         //when
-        Dealer dealer = new Dealer(cards);
+        Dealer dealer = Dealer.receiveInitialCard(initialCards);
 
         //then
         assertThat(dealer.isDrawingRequired()).isTrue();
@@ -66,13 +73,13 @@ class DealerTest {
     @Test
     void fifteenIsRequiredCard() {
         //given
-        Cards cards = new Cards(List.of(
+        List<Card> initialCards = List.of(
                 new Card(Suit.HEART, Rank.FIVE),
                 new Card(Suit.CLUB, Rank.TEN)
-        ));
+        );
 
         //when
-        Dealer dealer = new Dealer(cards);
+        Dealer dealer = Dealer.receiveInitialCard(initialCards);
 
         //then
         assertThat(dealer.isDrawingRequired()).isTrue();
@@ -82,13 +89,13 @@ class DealerTest {
     @Test
     void seventeenIsNotRequiredCard() {
         //given
-        Cards cards = new Cards(List.of(
+        List<Card> initialCards = List.of(
                 new Card(Suit.HEART, Rank.SEVEN),
                 new Card(Suit.CLUB, Rank.TEN)
-        ));
+        );
 
         //when
-        Dealer dealer = new Dealer(cards);
+        Dealer dealer = Dealer.receiveInitialCard(initialCards);
 
         //then
         assertThat(dealer.isDrawingRequired()).isFalse();

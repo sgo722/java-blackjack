@@ -9,7 +9,7 @@ public class Dealer extends Participant {
     private static final int CAN_DRAW = 16;
     private static final int BUST = 22;
 
-    public Dealer(Cards cards) {
+    private Dealer(Cards cards) {
         super(cards);
     }
 
