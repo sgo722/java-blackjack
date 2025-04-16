@@ -22,7 +22,7 @@ public class BlackjackGameController {
 
         OutputView.printSplitToPlayers(blackjackGame.getPlayerNames());
         OutputView.printDealerInitialCard(blackjackGame.getDealerCards());
-        OutputView.printPlayersCardList(blackjackGame.getPlayersCards());
+        OutputView.printPlayersCardList(blackjackGame.getPlayerNameToCards());
         return blackjackGame;
     }
 
@@ -56,7 +56,7 @@ public class BlackjackGameController {
 
     private static void printFinalCards(BlackjackGame blackjackGame) {
         OutputView.printDealerCardsWithTotalValue(blackjackGame.getDealerCards(), blackjackGame.getDealerTotalValue());
-        OutputView.printPlayersCardsWithTotalValue(blackjackGame.getPlayersCards(), blackjackGame.getPlayerTotalValue());
+        OutputView.printPlayersCardsWithTotalValue(blackjackGame.getPlayerNameToCards(), blackjackGame.getPlayerTotalValue());
     }
 
     private static void printFinalResults(BlackjackGame blackjackGame) {

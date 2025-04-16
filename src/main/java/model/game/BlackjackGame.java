@@ -77,7 +77,7 @@ public class BlackjackGame {
         return dealer.getCards();
     }
 
-    public Map<String, List<String>> getPlayersCards() {
+    public Map<String, List<String>> getPlayerNameToCards() {
         return players.stream()
                 .collect(Collectors.toMap(
                         Player::getName,
