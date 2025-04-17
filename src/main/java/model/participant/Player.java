@@ -28,6 +28,10 @@ public class Player extends Participant {
         return cards.calculateScore() <= CAN_DRAW;
     }
 
+    public boolean isInitialBlackjack(){
+        return cards.size() == 2 && isBlackjack();
+    }
+
     public String getName() {
         return name.getName();
     }

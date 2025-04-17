@@ -67,7 +67,7 @@ public class BlackjackGameController {
 
     private static void printFinalResults(BlackjackGame blackjackGame) {
         OutputView.printFinalResult();
-        OutputView.printDealerResultSummary(blackjackGame.getDealerResultSummary());
-        OutputView.printPlayersResults(blackjackGame.getPlayersResults());
+        OutputView.printDealerEarningAmount(blackjackGame.getDealerEarningAmount());
+        OutputView.printPlayersEarningAmount(blackjackGame.getPlayersEarningAmount());
     }
 }

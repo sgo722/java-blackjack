@@ -65,26 +65,22 @@ public class OutputView {
 
     public static void printFinalResult() {
         System.out.println();
-        System.out.println("## 최종 승패");
+        System.out.println("## 최종 수익");
     }
 
-    public static void printDealerResultSummary(List<Integer> dealerResultSummary) {
+    public static void printDealerEarningAmount(Integer dealerEarningAmount) {
         System.out.print("딜러");
         System.out.print(" : ");
-        System.out.print(dealerResultSummary.get(0) + "승");
-        System.out.print(" ");
-        System.out.print(dealerResultSummary.get(1) + "무");
-        System.out.print(" ");
-        System.out.print(dealerResultSummary.get(2) + "패");
+        System.out.print(dealerEarningAmount);
         System.out.println();
     }
 
 
-    public static void printPlayersResults(Map<String, String> playersResults) {
-        for(String playerName : playersResults.keySet()){
+    public static void printPlayersEarningAmount(Map<String, Integer> playerNameToEarningAmount) {
+        for(String playerName : playerNameToEarningAmount.keySet()){
             System.out.print(playerName);
             System.out.print(" : ");
-            System.out.print(playersResults.get(playerName));
+            System.out.print(playerNameToEarningAmount.get(playerName));
             System.out.println();
         }
 

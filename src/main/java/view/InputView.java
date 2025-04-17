@@ -24,7 +24,10 @@ public class InputView {
         for(String playerName : playerNames){
             System.out.print(playerName);
             System.out.print("의 베팅 금액은?");
-            Integer betMoney = SCANNER.nextInt();
+            System.out.println();
+            Integer betMoney = Integer.parseInt(SCANNER.nextLine());
+            System.out.println();
+
 
             playerNameToBetMoney.put(playerName, betMoney);
         }

@@ -1,7 +1,6 @@
 package model.card;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,5 +44,9 @@ public class Cards {
         return cards.stream()
                 .map(Card::toDisplay)
                 .collect(Collectors.toList());
+    }
+
+    public int size(){
+        return cards.size();
     }
 }

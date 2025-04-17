@@ -84,17 +84,11 @@ public class BlackjackGame {
         return dealer.getCards();
     }
 
-    public Map<String, String> getPlayersResults(){
-        GameResults gameResults = determineResults();
-        return gameResults.getPlayerResultsDisplay();
+    public Integer getDealerEarningAmount(){
+        return betManager.getDealerEarning(players, dealer);
     }
 
-    public List<Integer> getDealerResultSummary(){
-        GameResults gameResults = determineResults();
-        return gameResults.getDealerResultSummary();
-    }
-
-    private GameResults determineResults() {
-        return GameResults.of(players, dealer);
+    public Map<String, Integer> getPlayersEarningAmount(){
+        return betManager.getPlayerNameToEarningAmount(players, dealer);
     }
 }

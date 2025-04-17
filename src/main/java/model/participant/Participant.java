@@ -6,6 +6,7 @@ import model.card.Cards;
 import java.util.List;
 
 public abstract class Participant {
+    static final int BLACK_JACK = 21;
     protected Cards cards;
 
     protected Participant(Cards cards) {
@@ -27,6 +28,8 @@ public abstract class Participant {
     public void receive(Card draw) {
         cards = cards.add(draw);
     }
+
+    public boolean isBlackjack(){ return cards.calculateScore() == BLACK_JACK;}
 
     protected abstract int bustThreshold();
 }
