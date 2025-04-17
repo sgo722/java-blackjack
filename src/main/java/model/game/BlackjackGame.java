@@ -1,5 +1,6 @@
 package model.game;
 
+import model.bet.BetManager;
 import model.deck.DeckManager;
 import model.participant.Dealer;
 import model.participant.Players;
@@ -11,22 +12,25 @@ public class BlackjackGame {
 
     private final Players players;
     private final Dealer dealer;
+    private final BetManager betManager;
     private final DeckManager deckManager;
 
-    private BlackjackGame(Players players, Dealer dealer, DeckManager deckManager) {
+    private BlackjackGame(Players players, Dealer dealer, BetManager betManager, DeckManager deckManager) {
         this.players = players;
         this.dealer = dealer;
+        this.betManager = betManager;
         this.deckManager = deckManager;
     }
 
-    public static BlackjackGame splitInitialCard(List<String> playerNames) {
+    public static BlackjackGame splitInitialCard(List<String> playerNames, Map<String, Integer> playerNameToBetMoney) {
         DeckManager deckManager = new DeckManager();
         Players players = Players.fromNames(playerNames);
+        BetManager betManager = BetManager.from(playerNameToBetMoney);
 
         splitInitialCardToPlayers(players, deckManager);
         Dealer dealer = splitInitialCardToDealer(deckManager);
 
-        return new BlackjackGame(players, dealer, deckManager);
+        return new BlackjackGame(players, dealer, betManager, deckManager);
     }
 
     private static void splitInitialCardToPlayers(Players players, DeckManager deckManager) {
@@ -55,9 +59,6 @@ public class BlackjackGame {
         return dealer.isDrawingRequired();
     }
 
-    private GameResults determineResults() {
-        return GameResults.of(players, dealer);
-    }
 
     public Map<String, List<String>> getPlayerNameToCards() {
         return players.getNameToCards();
@@ -91,5 +92,9 @@ public class BlackjackGame {
     public List<Integer> getDealerResultSummary(){
         GameResults gameResults = determineResults();
         return gameResults.getDealerResultSummary();
+    }
+
+    private GameResults determineResults() {
+        return GameResults.of(players, dealer);
     }
 }

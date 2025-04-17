@@ -1,6 +1,8 @@
 package view;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class InputView {
@@ -14,6 +16,19 @@ public class InputView {
         String playerNames = SCANNER.nextLine();
 
         return List.of(playerNames.split(NAME_DELIMITER));
+    }
+
+    public static Map<String, Integer> inputBetMoneyFor(List<String> playerNames){
+        Map<String, Integer> playerNameToBetMoney = new HashMap<>();
+
+        for(String playerName : playerNames){
+            System.out.print(playerName);
+            System.out.print("의 베팅 금액은?");
+            Integer betMoney = SCANNER.nextInt();
+
+            playerNameToBetMoney.put(playerName, betMoney);
+        }
+        return playerNameToBetMoney;
     }
 
     public static String printDrawMore(String name) {

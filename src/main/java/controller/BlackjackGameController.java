@@ -5,10 +5,17 @@ import model.game.BlackjackGame;
 import view.InputView;
 import view.OutputView;
 
+import java.util.List;
+import java.util.Map;
+
 public class BlackjackGameController {
 
     public void start(){
-        BlackjackGame blackjackGame = splitInitialCardsForAll();
+        List<String> playerNames = InputView.inputPlayerNames();
+
+        Map<String, Integer> playerNameToBetMoney = InputView.inputBetMoneyFor(playerNames);
+
+        BlackjackGame blackjackGame = BlackjackGame.splitInitialCard(playerNames, playerNameToBetMoney);
 
         printInitialCards(blackjackGame);
 
@@ -17,10 +24,6 @@ public class BlackjackGameController {
         printFinalCards(blackjackGame);
 
         printFinalResults(blackjackGame);
-    }
-
-    private static BlackjackGame splitInitialCardsForAll() {
-        return BlackjackGame.splitInitialCard(InputView.inputPlayerNames());
     }
 
     private static void printInitialCards(BlackjackGame blackjackGame) {
