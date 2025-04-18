@@ -28,14 +28,18 @@ public class BetManager {
         return new BetManager(bets);
     }
 
-    public  Integer getDealerEarning(Players players, Dealer dealer) {
+    public Integer calculateDealerEarning(Players players, Dealer dealer) {
         return bets.stream()
                 .mapToInt(bet -> {
                     Player player = players.findPlayerBy(bet.getPlayerName());
                     int playerEarningAmount = betPolicy.calculatePlayerEarning(bet.getAmount(), player, dealer);
-                    return -playerEarningAmount;
+                    return calculateDealerEarningBy(playerEarningAmount);
                 })
                 .sum();
+    }
+
+    private int calculateDealerEarningBy(int playerEarningAmount) {
+        return -playerEarningAmount;
     }
 
     public Map<String, Integer> getPlayerNameToEarningAmount(Players players, Dealer dealer) {

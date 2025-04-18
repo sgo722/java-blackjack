@@ -4,7 +4,6 @@ import model.bet.BetManager;
 import model.deck.DeckManager;
 import model.participant.Dealer;
 import model.participant.Players;
-import model.result.GameResults;
 
 import java.util.*;
 
@@ -85,7 +84,7 @@ public class BlackjackGame {
     }
 
     public Integer getDealerEarningAmount(){
-        return betManager.getDealerEarning(players, dealer);
+        return betManager.calculateDealerEarning(players, dealer);
     }
 
     public Map<String, Integer> getPlayersEarningAmount(){

@@ -1,8 +1,10 @@
 package model.game;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,14 +13,26 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 class BlackjackGameTest {
 
+    private List<String> playerNames;
+    private Map<String, Integer> playerNameToBetMoney;
+
+    @BeforeEach
+    void setUp(){String playerNameA = "양";
+        String playerNameB = "준";
+        playerNames = List.of(playerNameA, playerNameB);
+        playerNameToBetMoney = Map.of(
+                playerNameA, 10000,
+                playerNameB, 20000
+        );
+    }
+
     @DisplayName("게임 생성 시 딜러는 2장의 카드를 지급받는다")
     @Test
     void dealerReceiveInitialCard() {
         // given
-        List<String> playerNames = List.of("양", "준");
+        BlackjackGame blackjackGame = BlackjackGame.splitInitialCard(playerNames, playerNameToBetMoney);
 
-        // when
-        BlackjackGame blackjackGame = BlackjackGame.splitInitialCard(playerNames);
+        //when
         List<String> dealerCards = blackjackGame.getDealerCards();
 
         // then
@@ -30,12 +44,11 @@ class BlackjackGameTest {
     @Test
     void playersReceiveInitialCard() {
         // given
-        String playerNameA = "양";
-        String playerNameB = "준";
-        List<String> playerNames = List.of(playerNameA, playerNameB);
+        String playerNameA = playerNames.get(0);
+        String playerNameB = playerNames.get(1);
+        BlackjackGame blackjackGame = BlackjackGame.splitInitialCard(playerNames, playerNameToBetMoney);
 
         // when
-        BlackjackGame blackjackGame = BlackjackGame.splitInitialCard(playerNames);
         Map<String, List<String>> playerNameToCards = blackjackGame.getPlayerNameToCards();
 
         // then
@@ -49,11 +62,10 @@ class BlackjackGameTest {
     @Test
     void drawMoreCard(){
         //given
-        String playerNameA = "양";
-        String playerNameB = "준";
+        String playerNameA = playerNames.get(0);
+        String playerNameB = playerNames.get(1);
+        BlackjackGame blackjackGame = BlackjackGame.splitInitialCard(playerNames, playerNameToBetMoney);
 
-        List<String> playerNames = List.of(playerNameA, playerNameB);
-        BlackjackGame blackjackGame = BlackjackGame.splitInitialCard(playerNames);
         //when
         blackjackGame.giveCardTo(playerNameA);
         Map<String, List<String>> playerNameToCards = blackjackGame.getPlayerNameToCards();
